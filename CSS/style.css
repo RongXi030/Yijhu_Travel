@@ -1,0 +1,95 @@
+/*============================================
+    1.Base
+  ============================================*/
+body{
+    font-family: "微軟正黑體", sans-serif;
+    color: #333;
+    min-width: 1000px;
+}
+a{
+    text-decoration: none;
+}
+/*============================================
+    2.Shared Components
+  ============================================*/
+.navbar{
+    display:flex;
+    align-items: center;
+    height:100px;
+    padding: 0 40px;
+    position: relative;
+    background-color:rgb(73, 73, 73);
+    outline: 2px solid rgb(0, 0, 0);
+    outline-offset: -2px;
+}
+.logo{
+    width:150px;
+    height:100px;
+    background-image: url("../image/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display:flex;
+    border-radius: 8px;
+    color:#888;
+    z-index: 10;
+}
+.nav-links{
+    display: flex;
+    height:100px;
+    /* gap:40px; */
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+}
+.links{
+    width:120px;
+    font-size: 18px;
+    font-weight: bold;
+    color:#da7727;
+    cursor:pointer;
+    padding:10px 0;
+    position:relative;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.links:hover{
+    color: white;
+    background-color: #da7727;
+}
+.forecast{
+    position: absolute;
+    bottom: 30px;  /* 距離底部 30px */
+    right: 30px;   /* 距離右邊 30px */
+    
+    /* --- 外觀裝飾 --- */
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景，很有質感 */
+    backdrop-filter: blur(5px); /* (選用) 背景模糊特效，像毛玻璃 */
+    padding: 15px 25px;
+    border-radius: 15px; /* 圓角 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* 陰影讓它浮起來 */
+    
+    /* --- 內部排版 --- */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 20; /* 確保它浮在圖片上面 */
+}
+/*============================================
+    3.Home Page
+  ============================================*/
+.hero-banner{
+    width: 100%;
+    height: 800px;
+    overflow: hidden;
+    background-color: #ddd;
+    position: relative;
+}
+.hero-banner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
