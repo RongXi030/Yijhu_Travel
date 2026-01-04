@@ -2,11 +2,12 @@
 <html>
 <head>
     <title>義竹抽籤</title>
-    <link rel="stylesheet" href="CSS/MyReset.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
 
 </head>
 <body>
+    <script src="JS/raffle.js" defer></script>
 
     <!--導覽列-->
     <div class="navbar">
@@ -27,9 +28,81 @@
             <a href="map.html" class="links">地圖</a>
 
             <!--抽籤按鈕-->
-            <a href="raffle.html" class="links">抽籤</a>
+            <a href="raffle.html" class="links" style="background-color: #da7727; color: white;">抽籤</a>
             
 
+        </div>
+    </div>
+    <div class="container my-4">
+        <div class="raffle-area row g-0 shadow-lg rounded overflow-hidden" style="height: 800px; border: 1px solid #ddd;">
+            
+            <div class="col-md-5 d-flex flex-column bg-light border-end relative h-100">
+                <div class="p-3 bg-secondary text-white fw-bold d-flex justify-content-between align-items-center">
+                    <span>🏆 抽籤結果 (可拖曳排序)</span>
+                    <span id="resultCount" class="badge bg-light text-dark">0</span>
+                </div>
+                
+                <div id="resultList" class="flex-grow-1 p-3 overflow-auto custom-scroll" style="position: relative;">
+                    <div id="emptyState" class="text-center text-muted mt-5">
+                        <div style="font-size: 50px;">👈</div>
+                        <p>請從右側選擇地點並開始抽籤</p>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-white border-top">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" onclick="generateRoute()">🗺️ 規劃路線 (Google Maps)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7 d-flex flex-column bg-white h-100">
+                <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-light">
+                    <h5 class="m-0 fw-bold">📍 選擇想去的地點</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="selectAll(true)">全選</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="selectAll(false)">取消</button>
+                    </div>
+                </div>
+
+                <div id="sourceList" class="flex-grow-1 p-3 overflow-auto custom-scroll">
+                    </div>
+
+                <div class="p-3 border-top bg-light">
+                    <div class="row g-2 align-items-center">
+                        <div class="col-auto">
+                            <label class="col-form-label fw-bold">抽選數量：</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" id="drawCount" class="form-control" min="1" value="3">
+                        </div>
+                        <div class="col-auto">
+                            <span class="text-muted" style="font-size: 14px;">(已選 <span id="selectedCount">0</span> 個)</span>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-danger text-white fw-bold px-4" onclick="startRaffle()">
+                                🎰 開始抽籤
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title fw-bold text-white" id="modalTitle">地點名稱</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImg" src="" class="img-fluid rounded mb-3 w-100" style="height: 200px; object-fit: cover;">
+                    <p id="modalDesc">這裡顯示詳細介紹...</p>
+                    <p class="text-muted"><small>📍 地址：<span id="modalAddr"></span></small></p>
+                </div>
+            </div>
         </div>
     </div>
     
