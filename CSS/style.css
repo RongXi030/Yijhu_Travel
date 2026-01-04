@@ -9,6 +9,19 @@ body{
 a{
     text-decoration: none;
 }
+body {
+    min-height: 100vh;
+}
+img, picture, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+p {
+    text-wrap: pretty;
+}
 /*============================================
     2.Shared Components
   ============================================*/
@@ -18,9 +31,7 @@ a{
     height:100px;
     padding: 0 40px;
     position: relative;
-    background-color:rgb(73, 73, 73);
-    outline: 2px solid rgb(0, 0, 0);
-    outline-offset: -2px;
+    background-color:rgb(243, 184, 57);
 }
 .logo{
     width:150px;
@@ -66,14 +77,17 @@ a{
     width: 100%;
     height: 800px;
     overflow: hidden;
-    background-color: #ddd;
+    background-color: #000;
     position: relative;
 }
-.hero-banner img{
-    width: 100%;
+.carousel, .carousel-inner, .carousel-item {
     height: 100%;
-    object-fit: cover;
-    object-position: center center;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
 }
 
 .weather-card {
@@ -140,6 +154,47 @@ a{
     font-size: 16px;
     color: #555;
     padding-top: 5px;
-    border-top: 2px dashed rgba(0,0,0,0.1); /* 用虛線分隔 */
+    border-top: 2px dashed rgba(0,0,0,0.1);
     margin-top: 5px;
+}
+
+.mediabutton{
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 15px 25px;
+    flex-direction: column;
+    z-index: 100;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.images, .videos {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+.images{
+    background-image: url("../image/carousel/image.svg");
+}
+.videos{
+    background-image: url("../image/carousel/video.svg");
+}
+.images.active, .videos.active {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(255, 165, 0, 0.8));
+}
+.images:hover, .videos:hover {
+    opacity: 1;
 }
