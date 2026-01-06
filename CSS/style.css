@@ -4,7 +4,10 @@
 body{
     font-family: "微軟正黑體", sans-serif;
     color: #333;
-    min-width: 1000px;
+    /* min-width: 1000px; */
+    padding-top: 100px;
+    width: 100%;
+    overflow-x: hidden;
     background-color: #d3a357;
 }
 a{
@@ -45,46 +48,43 @@ p {
 .ToTop.ToTopshow{
     opacity: 1;
 }
-.navbar{
-    display:flex;
-    align-items: center;
-    height:100px;
-    padding: 0 40px;
+.navbar {
+    height: 100px;
+    background-color: #909d71;
+    padding: 0 20px;
+}
+.logo {
+    background-image: url("../media/logo02.png"), url("../media/logo.png");
+    background-size: 150%, contain;
+    background-repeat: no-repeat;
+    background-position: bottom -20% left, center;
+    height: 100%; /* 確保 Logo 也是滿高 */
+    display: block; /* 確保是區塊元素 */
+}
+.navbar-collapse {
+    background-color: #909d71; 
+    z-index: 999;
+}
+.navbar-nav .links {
+    height: 100%;           /* 關鍵：強制填滿導覽列高度 */
+    width: 140px;           /* 固定寬度 */
+    padding: 0;             /* 移除 Bootstrap 預設 Padding */
+    margin: 0;              /* 移除預設 Margin */
+    
+    color: #314743;
+    cursor: pointer;
     position: relative;
-    background-color:#909d71;
-}
-.logo{
-    width:150px;
-    height:100px;
-    background-image: url("../media/logo02.png"),url("../media/logo.png");
-    background-size: 150%,contain;
-    background-repeat: no-repeat,no-repeat;
-    background-position: bottom -10px left,center;
-    display:flex;
-    border-radius: 8px;
-    color:#888;
-    z-index: 10;
-}
-.nav-links{
-    display: flex;
-    height:100px;
-    /* gap:40px; */
-    position: absolute;
-    left:50%;
-    transform: translateX(-50%);
-}
-.links{
-    /* width:120px; */
-    font-size: 20px;
-    font-weight: bold;
-    color:#314743;
-    cursor:pointer;
-    padding:0 30px;
-    position:relative;
     transition: all 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
+    display: flex;          /* 使用 Flex 佈局 */
+    justify-content: center;/* 水平置中 */
+    align-items: center;    /* 垂直置中 (文字在中間，但連結區塊是滿的) */
+    
+    font-weight: bold;
+}
+.links:hover {
+    color: #3f1a12 !important;
+    background-color: #ded3bf; /* 現在這會填滿整個 100px 高度 */
 }
 .footer-container {
     display: flex;
@@ -493,4 +493,135 @@ p {
 .opt-step.end .opt-badge {
     background-color: #dc3545;
 }
+/*============================================
+    修正後的 Media Queries (絕對強制版)
+  ============================================*/
 
+/* --- 1. 桌機版 (螢幕 >= 992px) --- */
+@media (min-width: 992px) {
+    /* 重置 offcanvas 為一般顯示 */
+    .offcanvas {
+        position: static !important;
+        z-index: auto;
+        flex-grow: 1;
+        width: auto !important;
+        height: auto !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        visibility: visible !important;
+        transition: none;
+    }
+    
+    .offcanvas-header { display: none; }
+    .offcanvas-body { 
+        padding: 0; 
+        height: auto !important; 
+        overflow: visible;
+    }
+
+    /* 導覽列容器設定 */
+    .navbar-nav {
+        flex-direction: row;
+        height: 100px !important; /* 強制容器高度 */
+        align-items: center;      /* 確保內容不跑版 */
+    }
+
+    /* ★★★ 核心修正：針對連結按鈕 ★★★ */
+    .navbar-nav .links {
+        /* 強制設定高度為 100px (與導覽列同高)，不再依賴繼承 */
+        height: 100px !important; 
+        width: 140px;
+        
+        /* 讓 <a> 標籤變成 Flex 容器，負責把內部的文字垂直置中 */
+        display: flex !important;
+        align-items: center !important;    /* 垂直置中 */
+        justify-content: center !important; /* 水平置中 */
+        
+        /* 重置其他樣式 */
+        padding: 0 !important;
+        margin: 0 !important;
+        border-bottom: none !important;
+    }
+
+    /* 修正 Hover 背景色 */
+    .navbar-nav .links:hover {
+        background-color: #ded3bf !important; /* 絕對會填滿 100px */
+        color: #3f1a12 !important;
+    }
+}
+
+/* --- 2. 手機版 (螢幕 < 992px) --- */
+@media (max-width: 991px) {
+    
+    /* 手機版樣式維持原樣 */
+    .navbar-nav .links {
+        height: auto !important; 
+        padding: 15px 0 !important;         
+        border-bottom: 1px solid rgba(255,255,255,0.2) !important; 
+        width: 100%; 
+        display: block !important; 
+    }
+    
+    .hero-banner {
+        height: auto; 
+        min-height: 100vh; 
+        padding-bottom: 60px;
+    }
+
+    .weather-card {
+        position: relative;
+        width: 90%;
+        margin: 20px auto;
+        top: 0; right: 0; left: 0;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .mediabutton {
+        position: relative;
+        margin: 10px auto;
+        bottom: 0; left: 0;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .raffle-area.row {
+        height: auto !important;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .raffle-area > .col-md-5,
+    .raffle-area > .col-md-7 {
+        height: auto; 
+        min-height: 400px;
+    }
+
+    #sourceList, #resultList {
+        height: 300px; 
+    }
+    
+    #optimizedPathContainer {
+        flex-wrap: wrap;
+    }
+    
+    .opt-arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
+    }
+
+    .map-controls {
+        top: auto; bottom: 20px;
+        right: 10px; left: 10px;
+        flex-direction: row-reverse;
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+    }
+    
+    .map-container {
+        height: 60vh !important;
+    }
+    
+    .footer-container {
+        gap: 40px; 
+    }
+}

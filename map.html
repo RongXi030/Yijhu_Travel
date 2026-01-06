@@ -17,30 +17,66 @@
 
 
     <a href="#top" class="ToTop"><img src="media/up.svg"></a>
+
     <!--導覽列-->
-    <div class="navbar" id="top">
-
-        <!--義竹旅遊網icon-->
-        <a class="logo" href="index.html"></a>
-
-        <!--導覽列按鈕-->
-        <div class="nav-links">
-
-            <!--首頁按鈕-->
-            <a href="index.html" class="links">首頁</a>
-
-            <!--義竹簡介按鈕-->
-            <a href="introduce.html" class="links">『義』同探索</a>
-
-            <!--地圖按鈕-->
-            <a href="map.html" class="links" style="background-color: #ded3bf; color: #3f1a12;">『義』覽無遺</a>
-
-            <!--抽籤按鈕-->
-            <a href="raffle.html" class="links">『義』點迷津</a>
+    <nav class="navbar navbar-expand-lg fixed-top" id="top" style="background-color: #909d71; padding: 0 20px;">
+    
+        <div class="container-fluid h-100">
             
-            <a href="#contactus" class="links">『義』打就通</a>
+            <a class="navbar-brand logo h-100" href="index.html" style="width: 150px;"></a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="offcanvas offcanvas-end h-100" tabindex="-1" id="offcanvasNavbar" style="background-color: #909d71;">
+                
+                <div class="offcanvas-header border-bottom border-light">
+                    <h5 class="offcanvas-title text-white fw-bold">義竹旅遊網</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                </div>
+
+                <div class="offcanvas-body h-100 p-0">
+                    <div class="navbar-nav mx-auto">
+                        
+                        <a href="index.html" class="links nav-link">
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="fs-5">首頁</span>
+                            </div>
+                        </a>
+
+                        <a href="introduce.html" class="links nav-link">
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="fs-5">『義』同探索</span>
+                                <span class="small text-white-50" style="font-size: 12px;">介紹義竹</span>
+                            </div>
+                        </a>
+
+                        <a href="map.html" class="links nav-link">
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="fs-5">『義』覽無遺</span>
+                                <span class="small text-white-50" style="font-size: 12px;">地圖導覽</span>
+                            </div>
+                        </a>
+
+                        <a href="raffle.html" class="links nav-link">
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="fs-5">『義』點迷津</span>
+                                <span class="small text-white-50" style="font-size: 12px;">行程抽籤</span>
+                            </div>
+                        </a>
+
+                        <a href="#contactus" class="links nav-link">
+                            <div class="d-flex flex-column align-items-center">
+                                <span class="fs-5">『義』打就通</span>
+                                <span class="small text-white-50" style="font-size: 12px;">聯絡我們</span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </nav>
 
     <div class="map-container" style="position: relative; height: 80vh; width: 100%;">
         
@@ -72,13 +108,13 @@
 
             <div class="form-check form-switch border-top pt-2">
                 <input class="form-check-input" type="checkbox" id="toggleGas" checked onchange="toggleLayer('gas')">
-                <label class="form-check-label fw-bold" for="toggleGas">⛽ 加油站</label>
+                <label class="form-check-label fw-bold" for="toggleGas">加油站</label>
             </div>
 
-            <div class="form-check form-switch">
+            <!-- <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="toggleFood" checked onchange="toggleLayer('food')">
                 <label class="form-check-label fw-bold" for="toggleFood">🍜 在地美食</label>
-            </div>
+            </div> -->
         </div>
     </div>
 

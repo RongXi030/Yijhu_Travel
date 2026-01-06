@@ -39,7 +39,7 @@ const layers = {
     spots: L.layerGroup().addTo(map),        // 景點
     store_711: L.layerGroup().addTo(map),    // 7-11
     store_hilife: L.layerGroup().addTo(map), // 萊爾富
-    gas: L.layerGroup().addTo(map),          // 加油站
+    gas_cpc: L.layerGroup().addTo(map),          // 加油站
     food: L.layerGroup().addTo(map)          // 美食 (建議新增)
 };
 
@@ -91,30 +91,70 @@ placesData.forEach(place => {
 // 2. 擴充設施資料 (記得確認實際座標)
 const amenities = [
     // 7-11
-    { name: "7-11 義竹門市", lat: 23.3374925, lng: 120.2444728, type: "store_711" },
-    { name: "7-11 二竹門市", lat: 23.3364845, lng: 120.2424541, type: "store_711" },
+    { 
+        name: "7-ELEVEN 義竹門市", 
+        lat: 23.3374925, 
+        lng: 120.2444728, 
+        type: "store_711",
+        cover: "./media/map/7-Eleven-Logo.png", // 暫用 Logo 當圖片
+        desc: "24小時營業便利商店"
+    },
+    { 
+        name: "7-ELEVEN 二竹門市", 
+        lat: 23.3364845, 
+        lng: 120.2424541, 
+        type: "store_711",
+        cover: "./media/map/7-Eleven-Logo.png",
+        desc: "24小時營業便利商店"
+    },
     
-    // 萊爾富 (假設座標，請確認)
-    { name: "萊爾富 嘉縣義竹店", lat: 23.3384752, lng: 120.248022, type: "store_hilife" },
+    // 萊爾富
+    { 
+        name: "萊爾富 <br>義竹賽鴿笭門市", 
+        lat: 23.3384752, 
+        lng: 120.248022, 
+        type: "store_hilife",
+        cover: "./media/map/HiLife-logo.svg.png",
+        desc: "提供包裹寄送與繳費服務"
+    },
 
     // 加油站
-    { name: "台灣中油 義竹站(直營)", lat: 23.3392249, lng: 120.2493839, type: "gas" },
-
-    // (建議) 美食
-    { name: "義竹阿婆冰", lat: 23.33700, lng: 120.24400, type: "food" },
-    { name: "義竹魚捲", lat: 23.33680, lng: 120.24420, type: "food" }
+    { 
+        name: "台灣中油 <br>義竹站(直營)", 
+        lat: 23.3392249, 
+        lng: 120.2493839, 
+        type: "gas_cpc",
+        cover: "./media/map/cpc-logo.png",
+        desc: "提供 92/95/98 汽油與柴油"
+    },
 ];
 
 // 3. 產生標記 (依照類型分配圖標)
 amenities.forEach(item => {
     let icon;
     if (item.type === 'store_711') icon = L.icon({ iconUrl: './media/map/7-Eleven-Logo.png', iconSize: [25, 25] });
-    else if (item.type === 'store_hilife') icon = L.icon({ iconUrl: './media/map/HiLife-logo.svg.png', iconSize: [25, 25] }); // 可換成其他愛心圖標
-    else if (item.type === 'gas') icon = storeIcon; // 暫用綠色圖標
+    else if (item.type === 'store_hilife') icon = L.icon({ iconUrl: './media/map/HiLife-logo.svg.png', iconSize: [25, 25] });
+    else if (item.type === 'gas_cpc') icon = L.icon({ iconUrl: './media/map/cpc-logo.png', iconSize: [35, 35] });
     else icon = storeIcon;
 
     const marker = L.marker([item.lat, item.lng], { icon: icon });
-    marker.bindPopup(`<b>${item.name}</b>`);
+    const popupContent = `
+        <div class="custom-popup">
+            <div style="background-color:#fff; padding:10px; text-align:center;">
+                <img src="${item.cover}" class="popup-img" style="object-fit: contain; height: 80px;">
+            </div>
+            <div class="popup-body">
+                <h6 class="fw-bold mb-1">${item.name}</h6>
+                <div class="d-grid gap-2">
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}" target="_blank" class="btn btn-sm btn-warning text-white">
+                        🚗 帶我去 (導航)
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    marker.bindPopup(popupContent);
     
     if (layers[item.type]) {
         layers[item.type].addLayer(marker);
@@ -130,7 +170,7 @@ function toggleLayer(type) {
     let checkboxId;
     if(type === 'store_711') checkboxId = 'toggle711';
     else if(type === 'store_hilife') checkboxId = 'toggleHilife';
-    else if(type === 'gas') checkboxId = 'toggleGas';
+    else if(type === 'gas_cpc') checkboxId = 'toggleGascpc';
     else if(type === 'food') checkboxId = 'toggleFood';
     
     const isChecked = document.getElementById(checkboxId).checked;
