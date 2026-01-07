@@ -92,8 +92,8 @@
 
                 <div class="p-3 border-top">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary" onclick="generateRoute()">🗺️ 規劃路線 (Google Maps)</button>
-                        <button class="btn btn-warning text-white fw-bold flex-grow-1" onclick="calculateAndShowOptimized()">⚡ 計算最佳路徑</button>
+                        <button class="btn fw-bold" style="color: #3f1a12;background-color:#7296b8;" onclick="generateRoute()">規劃路線 (Google Maps)</button>
+                        <button class="btn fw-bold flex-grow-1" style="color: #3f1a12;background-color:#f5c74d;" onclick="calculateAndShowOptimized()">計算最佳路徑</button>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                             <span class="text-muted" style="font-size: 14px;">(已選 <span id="selectedCount">0</span> 個)</span>
                         </div>
                         <div class="col-auto">
-                            <button class="btn btn-danger text-white fw-bold px-4" onclick="startRaffle()">『義』點迷津</button>
+                            <button class="btn fw-bold px-4" style="color: #3f1a12;background-color: #d63c30;" onclick="startRaffle()">『義』點迷津</button>
                         </div>
                     </div>
                 </div>
@@ -129,8 +129,8 @@
         </div>
         <div id="optimizedSection" class="row mt-5 d-none">
             <div class="col-12">
-                <h3 class="fw-bold mb-4 border-start border-5 border-warning ps-3" style="color: #da7727;">
-                    ⚡ 建議最佳路線 (省時省油)
+                <h3 class="fw-bold mb-4 border-start border-5 border-warning ps-3" style="color: #3f1a12;">
+                    建議最佳路線
                 </h3>
                 
                 <div class="bg-white p-4 rounded shadow-sm">
@@ -140,7 +140,7 @@
                     <div class="text-center border-top pt-3">
                         <p class="text-muted small mb-2">已根據最短直線距離重新排序</p>
                         <button id="btnOptimizedMap" class="btn btn-lg btn-success rounded-pill px-5 shadow">
-                            🚗 開啟最佳路線導航 (Google Maps)
+                            開啟最佳路線導航 (Google Maps)
                         </button>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
         </div>
         <div id="resultSection" class="row mt-5 d-none">
             <div class="col-12">
-                <h3 class="fw-bold mb-4 border-start border-5 border-success ps-3" style="color: #314743;">
+                <h3 class="fw-bold mb-4 border-start border-5 border-success ps-3" style="color: #3f1a12;">
                     詳細資訊
                 </h3>
                 

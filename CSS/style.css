@@ -40,6 +40,8 @@ p {
     border-radius: 8px;
     opacity: 0;
     transition: 0.3s;
+    pointer-events: none;
+    cursor: pointer;
 }
 .ToTop img{
     height: 40px;
@@ -47,6 +49,7 @@ p {
 }
 .ToTop.ToTopshow{
     opacity: 1;
+    pointer-events: auto;
 }
 .navbar {
     height: 100px;
@@ -66,19 +69,19 @@ p {
     z-index: 999;
 }
 .navbar-nav .links {
-    height: 100%;           /* 關鍵：強制填滿導覽列高度 */
-    width: 140px;           /* 固定寬度 */
-    padding: 0;             /* 移除 Bootstrap 預設 Padding */
-    margin: 0;              /* 移除預設 Margin */
+    height: 100%;
+    width: 140px;
+    /* padding: 0;
+    margin: 0;        */
     
     color: #314743;
     cursor: pointer;
     position: relative;
     transition: all 0.3s;
     
-    display: flex;          /* 使用 Flex 佈局 */
-    justify-content: center;/* 水平置中 */
-    align-items: center;    /* 垂直置中 (文字在中間，但連結區塊是滿的) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     font-weight: bold;
 }
@@ -494,61 +497,32 @@ p {
     background-color: #dc3545;
 }
 /*============================================
-    修正後的 Media Queries (絕對強制版)
+    Media Queries
   ============================================*/
 
-/* --- 1. 桌機版 (螢幕 >= 992px) --- */
 @media (min-width: 992px) {
-    /* 重置 offcanvas 為一般顯示 */
     .offcanvas {
         position: static !important;
-        z-index: auto;
         flex-grow: 1;
-        width: auto !important;
-        height: auto !important;
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        visibility: visible !important;
         transition: none;
     }
-    
-    .offcanvas-header { display: none; }
-    .offcanvas-body { 
-        padding: 0; 
-        height: auto !important; 
-        overflow: visible;
-    }
 
-    /* 導覽列容器設定 */
     .navbar-nav {
         flex-direction: row;
-        height: 100px !important; /* 強制容器高度 */
-        align-items: center;      /* 確保內容不跑版 */
+        height: 100px !important;
+        align-items: center;
     }
 
-    /* ★★★ 核心修正：針對連結按鈕 ★★★ */
     .navbar-nav .links {
-        /* 強制設定高度為 100px (與導覽列同高)，不再依賴繼承 */
+        
         height: 100px !important; 
         width: 140px;
         
-        /* 讓 <a> 標籤變成 Flex 容器，負責把內部的文字垂直置中 */
         display: flex !important;
-        align-items: center !important;    /* 垂直置中 */
-        justify-content: center !important; /* 水平置中 */
-        
-        /* 重置其他樣式 */
-        padding: 0 !important;
-        margin: 0 !important;
-        border-bottom: none !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
-    /* 修正 Hover 背景色 */
-    .navbar-nav .links:hover {
-        background-color: #ded3bf !important; /* 絕對會填滿 100px */
-        color: #3f1a12 !important;
-    }
 }
 
 /* --- 2. 手機版 (螢幕 < 992px) --- */
@@ -565,8 +539,8 @@ p {
     
     .hero-banner {
         height: auto; 
-        min-height: 100vh; 
-        padding-bottom: 60px;
+        min-height: 60vh; 
+        /* padding-bottom: 60px; */
     }
 
     .weather-card {
@@ -581,6 +555,7 @@ p {
         position: relative;
         margin: 10px auto;
         bottom: 0; left: 0;
+        background-size: contain;
         background: rgba(255, 255, 255, 0.9);
     }
 
@@ -622,6 +597,7 @@ p {
     }
     
     .footer-container {
+        font-size: 70%;
         gap: 40px; 
     }
 }

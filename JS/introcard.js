@@ -62,12 +62,12 @@ function generateContent() {
             <div class="modal fade" id="modal-spot${place.id}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
-                        <div class="modal-header bg-success text-white">
+                        <div class="modal-header text-white" style="background-color:#909d71;">
                             <h5 class="modal-title fw-bold">${place.name}</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body p-0">
-                            <div id="carouselSpot${place.id}" class="carousel slide" data-bs-ride="carousel">
+                            <div id="carouselSpot${place.id}" class="carousel slide" style="background-color:#000000;" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     ${carouselItemsHTML}
                                 </div>
@@ -79,7 +79,7 @@ function generateContent() {
                                 </button>
                             </div>
                             
-                            <div class="p-4">
+                            <div class="p-4" style="background-color:#d3a357;">
                                 <h4 class="fw-bold" style="color: #3f1a12;">詳細介紹</h4>
                                 <div class="modaltext">
                                     <p class="lh-lg text-secondary">${place.fullDesc || place.desc}</p>
