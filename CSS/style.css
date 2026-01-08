@@ -9,6 +9,9 @@ body{
     width: 100%;
     overflow-x: hidden;
     background-color: #d3a357;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 a{
     text-decoration: none;
@@ -320,6 +323,18 @@ p {
 .my-map-tooltip::before {
     border-top-color: #314743;
 }
+.custom-spot-icon {
+    border-radius: 50%;        /* 讓正方形圖片變圓形 */
+    object-fit: cover;         /* 確保圖片填滿不變形 */
+    
+    transition: transform 0.2s; /* 滑鼠移過去的動畫效果 */
+}
+
+/* 滑鼠移過去時稍微放大 */
+.custom-spot-icon:hover {
+    transform: scale(1.1);
+    z-index: 1000 !important;
+}
 /*============================================
     6.raffle
   ============================================*/
@@ -526,9 +541,14 @@ p {
 }
 
 /* --- 2. 手機版 (螢幕 < 992px) --- */
+/*============================================
+    修正後的 Media Queries (針對手機版排版優化 - V3)
+  ============================================*/
+
+/* --- 手機版 (螢幕 < 992px) --- */
 @media (max-width: 991px) {
-    
-    /* 手機版樣式維持原樣 */
+
+    /* 1. 導覽列：手機版連結列表樣式 */
     .navbar-nav .links {
         height: auto !important; 
         padding: 15px 0 !important;         
@@ -537,67 +557,137 @@ p {
         display: block !important; 
     }
     
+    /* 2. 首頁輪播區：垂直堆疊，但在高度上更緊湊 */
     .hero-banner {
-        height: auto; 
-        min-height: 60vh; 
-        /* padding-bottom: 60px; */
+        height: auto !important; 
+        min-height: auto !important; /* 修正：移除強制滿版，解決下方多餘大黑邊 */
+        background-color: #000 !important; 
+        display: flex;
+        flex-direction: column; 
+        padding-bottom: 30px; /* 底部留一點點呼吸空間即可 */
     }
 
+    /* 影片/圖片區域：保持佔螢幕一半高度 */
+    #imageSection, #videoSection {
+        height: 50vh !important; 
+        width: 100%;
+        position: relative;
+        flex-shrink: 0; 
+    }
+
+    .hero-banner img,
+    .hero-banner video {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important; 
+    }
+
+    /* 3. 天氣卡片：緊接著影片下方 */
     .weather-card {
-        position: relative;
-        width: 90%;
-        margin: 20px auto;
-        top: 0; right: 0; left: 0;
-        background: rgba(255, 255, 255, 0.9);
+        position: relative !important; 
+        width: 90% !important;
+        max-width: 400px;
+        margin: 10px auto !important; /* 修正：減少上方邊距 (原本是 20px) */
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
+        
+        background: rgba(255, 255, 255, 0.95); 
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
     }
 
+    .weather-main .temp { font-size: 32px; }
+    .weather-main .icon { font-size: 40px; }   
+
+    /* 4. 媒體按鈕：緊接在天氣卡下方 */
     .mediabutton {
-        position: relative;
-        margin: 10px auto;
-        bottom: 0; left: 0;
-        background-size: contain;
+        position: relative !important;
+        width: fit-content;
+        margin: 5px auto 10px auto !important; /* 修正：減少間距 */
+        bottom: auto !important;
+        left: auto !important;
+        transform: none !important;
+        
         background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .images, .videos {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* 5. 抽籤頁面 (Raffle) */
+    
+    .container.my-4 {
+        width: 94% !important; 
+        margin: 20px auto !important;
+        padding: 0 !important;
+        flex-grow: 1; 
+        display: flex;
+        flex-direction: column;
     }
 
     .raffle-area.row {
         height: auto !important;
+        width: 100% !important;
+        margin: 0 !important;
         display: flex;
         flex-direction: column-reverse;
+        border-radius: 12px !important; 
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
     }
 
     .raffle-area > .col-md-5,
     .raffle-area > .col-md-7 {
         height: auto; 
-        min-height: 400px;
+        width: 100% !important;
+        min-height: 500px; 
+        border: none !important;
     }
 
     #sourceList, #resultList {
-        height: 300px; 
+        height: 400px; 
+        min-height: 300px;
     }
     
+    /* 6. 最佳路徑：改回「橫向」排列 (Row) */
     #optimizedPathContainer {
-        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row !important; /* 修正：改回橫向 */
+        flex-wrap: wrap !important;     /* 修正：允許換行 */
+        justify-content: center;        /* 置中對齊 */
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
     }
     
-    .opt-arrow {
-        transform: rotate(90deg);
-        margin: 10px 0;
+    .opt-step {
+        width: auto !important; /* 讓寬度適應內容，不要佔滿一行 */
+        display: flex;
+        flex-direction: column; /* 圖片在字上面 */
+        align-items: center;
     }
 
-    .map-controls {
-        top: auto; bottom: 20px;
-        right: 10px; left: 10px;
-        flex-direction: row-reverse;
-        flex-wrap: wrap-reverse;
-        justify-content: center;
+    /* 箭頭樣式修正 */
+    .opt-arrow {
+        transform: rotate(0deg) !important; /* 修正：箭頭指向右邊 */
+        margin: 0 5px;
+        color: #da7727; 
+        font-size: 24px;
     }
-    
+
+    /* 7. 地圖與 Footer 修正 */
     .map-container {
-        height: 60vh !important;
+        height: 65vh !important;
+        width: 100%;
+        flex-grow: 1; 
     }
     
     .footer-container {
-        font-size: 70%;
         gap: 40px; 
     }
 }

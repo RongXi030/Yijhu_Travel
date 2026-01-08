@@ -1,11 +1,25 @@
+function getImages(baseName, count, format = ".jpg") {
+    let path = "./media/intro/"; // 圖片資料夾路徑
+    let arr = [];
+
+    // 1. 加入主圖 (例如 id01.jpg)
+    arr.push(`${path}${baseName}${format}`);
+
+    // 2. 自動迴圈加入子圖 (例如 id01-1.jpg 到 id01-14.jpg)
+    for (let i = 1; i <= count; i++) {
+        arr.push(`${path}${baseName}-${i}${format}`);
+    }
+
+    return arr;
+}
 const placesData = [
     { 
         id: 1, 
         name: "翁岳生祖居", 
         lat:23.3322927,
         lng:120.242245,
-        cover: "./media/intro/id-01.JPG",
-        images: ["./media/intro/id-01.JPG", "https://picsum.photos/800/400?random=1"],
+        cover: "./media/intro/id01.jpg",
+        images: getImages("id01", 14),
         desc: "明治時期的閩南古厝，如何孕育出台灣五任大法官？走進「存德堂」，除了珍貴的法學手稿與老照片，更藏著一段跨越世紀的動人故事...", 
         fullDesc: `
             <p>推開歲月的木門，時光彷彿凝結在明治39年（1906年）。這座位於八掌溪河畔、承襲傳統閩南建築語彙的古厝，是前司法院長翁岳生的祖居，也是義竹鄉最具代表性的文化地標之一。</p>
@@ -28,8 +42,8 @@ const placesData = [
         name: "馨滿義竹", 
         lat:23.339501, 
         lng:120.249899,
-        cover: "./media/intro/id-02.JPG",
-        images: ["./media/intro/id-02.JPG", "https://picsum.photos/800/400?random=2"],
+        cover: "./media/intro/id02.jpg",
+        images: getImages("id02", 3),
         desc: "回到日本時代的義竹，火車鳴笛聲中總夾雜著淡淡糖香。這裡曾是「糖業王國」的樞紐，更藏著一段蔗農子弟獨有的搭車記憶。想知道這條鐵道背後的故事...",
         fullDesc: `
             <p>回溯至日本時代，臺灣享有「糖業王國」的美譽，而義竹這片沃土更是甘蔗的重要產地。那時，廣袤的蔗田不僅撐起了地方經濟，也賦予了蔗農子弟一份獨有的「甜蜜特權」——免費搭乘台糖小火車。</p>
@@ -50,8 +64,8 @@ const placesData = [
         name: "翁清江古厝", 
         lat:23.3337724,
         lng:120.2436863,
-        cover: "./media/intro/id-03.JPG", 
-        images: ["./media/intro/id-03.JPG"], 
+        cover: "./media/intro/id03.jpg", 
+        images: getImages("id03", 4),
         desc: "義竹鄉間竟藏著荷蘭人設計的豪宅？融合閩日西三種風格，門楣上的神祕盾牌更暗藏玄機。一窺前中研院院長翁啟惠祖居的真實風貌...", 
         fullDesc: `
             <p>位於嘉義縣義竹鄉六桂村的翁清江古宅，始建於1908年，於1912年完工，是日治時期留下的重要歷史建築。宅主人翁清江先生交友廣闊，不僅與日本人往來密切，更有荷蘭籍友人為其設計宅第。古宅融合閩南式、日式與西洋式建築元素，充分展現當時多元文化的交會風貌。</p>
@@ -79,8 +93,8 @@ const placesData = [
         name: "東後寮教會", 
         lat:23.378228, 
         lng:120.246697,
-        cover: "./media/intro/id-04.JPG", 
-        images: ["./media/intro/id-04.JPG"], 
+        cover: "./media/intro/id04.jpg", 
+        images: getImages("id04", 4),
         desc: "義竹路旁的紅磚秘境，竟是南台灣罕見的「巴西力卡式」老教堂！1927年的絕美拱窗與精湛英格蘭砌法，邀你走入這份百年的神聖寧靜...", 
         fullDesc: `
             <p>在義竹通往朴子的路上，有一座被列為「歷史建築百景」的紅磚瑰寶。建於1927年的義竹天主堂，是南台灣少見保存完好的磚木構造教堂，該建築很好的展現了教堂的莊嚴美感，給人一種神聖、靜謐的感覺。若是喜愛古老建築，抑或是熱衷於在幽靜的地方消磨時光的旅客，這裡將是你不可錯過的景點。</p>
@@ -98,8 +112,8 @@ const placesData = [
         name: "東榮村火車頭公園", 
         lat:23.3787119,
         lng:120.2441868,
-        cover: "./media/intro/id-05.JPG", 
-        images: ["./media/intro/id-05.JPG"], 
+        cover: "./media/intro/id05.jpg", 
+        images: getImages("id05", 10),
         desc: "東後寮的鐵道旁，時間彷彿走得特別慢。昔日的五分車與不老的水牛，守候著被封存的糖業記憶。不需要趕車，只需漫步舊鐵軌，聆聽這段凝結的歲月...", 
         fullDesc: `
             <p><strong style="color: #3f1a12;">停駛的五分車，不停歇的農村記憶：</strong><br>在東後寮的鐵道旁，時間彷彿走得特別慢。這裡曾是糖業鐵路的重要節點，昔日滿載甘蔗的「五分車」穿梭於此，揚起陣陣塵土與甜香。如今，轟隆的引擎聲已遠去，只留下一輛靜止的黃色小火車與一段延伸至天際的鐵軌，安靜地守護著這片廣袤的玉米田。</p><br>
@@ -112,8 +126,8 @@ const placesData = [
         name: "中正堂彩繪", 
         lat:23.3365561,
         lng:120.2459599,
-        cover: "./media/intro/id-06.JPG", 
-        images: ["./media/intro/id-06.JPG"], 
+        cover: "./media/intro/id06.jpg", 
+        images: getImages("id06", 3), 
         desc: "巨大的英文字母上，竟藏著無數張珍貴老照片？這座結合歷史與現代的裝置藝術，訴說著義竹人的集體回憶。來這裡用鏡頭閱讀故事，發現更多隱藏驚喜...", 
         fullDesc: `
             <p><strong>你以為這只是一座裝置藝術嗎？ 請靠近一點。</strong>在「YIZHU」這五個字母裡，每個英文字母的表面，都拼貼著泛黃的黑白老照片，藏著義竹人的集體回憶：有背著書包的孩子、有滿載甘蔗的火車，也有在田間揮汗收割的群像。</p><br>
@@ -126,8 +140,8 @@ const placesData = [
         name: "義竹修緣禪寺", 
         lat:23.3346879,
         lng:120.2445254,
-        cover: "./media/intro/id-07.JPG", 
-        images: ["./media/intro/id-07.JPG"], 
+        cover: "./media/intro/id07.jpg", 
+        images: getImages("id07", 4),
         desc: "義竹田間竟藏著一座氣勢磅礡的皇宮級建築！「修緣」二字源自濟公俗名，這裡不只鐘鼓樓巍峨聳立，更充滿「笑看人生」的自在氛圍。想領悟這份獨特的豁達...", 
         fullDesc: `
             <p>在義竹，有一座廟宇不談嚴肅的戒律，只談「緣」。「修緣禪寺」供奉著那位手持破扇、笑看人間的濟公活佛。來到這裡，你不必拘泥於繁文縟節，只需帶著一顆虔誠而放鬆的心。</p>
@@ -151,8 +165,8 @@ const placesData = [
         name: "義竹慈化寺", 
         lat:23.3343399,
         lng:120.2441555,
-        cover: "./media/intro/id-08.JPG", 
-        images: ["./media/intro/id-08.JPG"], 
+        cover: "./media/intro/id08.jpg", 
+        images: getImages("id08", 4),
         desc: "義竹鄉半數人口都姓翁，守護這個顯赫世家的竟是這尊「祖佛」！從康熙年間的私家神壇變身宏偉仿宋宮殿，慈化寺藏著一段跨海而來的開墾傳奇...", 
         fullDesc: `
             <p><strong style="color: #3f1a12;">從安溪到義竹的守護：</strong><br>你可能不知道，義竹的「翁」姓佔了全鄉人口的一大半，而慈化寺供奉的「董公真人」，正是隨翁氏先祖從福建安溪科榜跨海來台的「祖佛」。在清康熙年間，這尊神像原本只供奉在私人的公廳與宗祠內，是家族內部的守護神。直到民國62年（1973年），才由族人集資建廟，將這份家族的庇佑轉化為全鄉的信仰中心。</p><br>

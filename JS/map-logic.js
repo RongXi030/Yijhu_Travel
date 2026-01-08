@@ -45,9 +45,27 @@ const layers = {
 
 
 placesData.forEach(place => {
-    const marker = L.marker([place.lat, place.lng], { icon: spotIcon });
     
-    // 綁定 Popup 內容 (跟抽籤卡片很像)
+    // 1. 動態產生圖片路徑
+    // padStart(2, '0') 會將 1 變成 "01", 2 變成 "02"... 以此類推，對應您的檔名
+    const iconId = place.id.toString().padStart(2, '0'); 
+    
+    // 假設圖片放在 media/map/ 資料夾下
+    const iconUrl = `./media/map/icon${iconId}.jpg`; 
+
+    // 2. 為每個景點建立專屬的 Icon
+    const customIcon = L.icon({
+        iconUrl: iconUrl,
+        iconSize: [60, 60],      // 設定圖標大小 (您可以依需求調整，例如 [50, 50])
+        iconAnchor: [30, 30],    // 讓圖標中心點對準座標 (大小的一半)
+        popupAnchor: [0, -24],   // Popup 彈出位置往上推
+        className: 'custom-spot-icon' // 套用剛剛寫的 CSS 樣式
+    });
+
+    // 3. 使用新的 customIcon 建立標記
+    const marker = L.marker([place.lat, place.lng], { icon: customIcon });
+    
+    // --- 以下維持原本的 Popup 與 Tooltip 設定不變 ---
     const popupContent = `
         <div class="custom-popup">
             <img src="${place.cover}" class="popup-img">
@@ -70,17 +88,16 @@ placesData.forEach(place => {
     const tooltipContent = `
         <div class="text-center">
             <img src="${place.cover}" style="width: 120px; height: 80px; object-fit: cover; border-radius: 4px; margin-bottom: 4px;">
-            <div class="fw-bold small" style="font-size:20px">${place.name}</div>
+            <div class="fw-bold small" style="font-size:16px">${place.name}</div>
         </div>
     `;
 
     marker.bindTooltip(tooltipContent, {
-        direction: 'top',      // 顯示在標記上方
-        offset: [0, -40],      // 往上推一點，不要擋到標記
-        opacity: 1,            // 不透明
-        className: 'my-map-tooltip' // 自訂樣式類別
+        direction: 'top',      
+        offset: [0, -30], // 因為圖標變圓形了，Tooltip 位置稍微調整      
+        opacity: 1,            
+        className: 'my-map-tooltip' 
     });
-    
     
     layers.spots.addLayer(marker);
 });
@@ -170,7 +187,7 @@ function toggleLayer(type) {
     let checkboxId;
     if(type === 'store_711') checkboxId = 'toggle711';
     else if(type === 'store_hilife') checkboxId = 'toggleHilife';
-    else if(type === 'gas_cpc') checkboxId = 'toggleGascpc';
+    else if(type === 'gas_cpc') checkboxId = 'toggleGas';
     else if(type === 'food') checkboxId = 'toggleFood';
     
     const isChecked = document.getElementById(checkboxId).checked;
