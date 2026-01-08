@@ -53,13 +53,15 @@ placesData.forEach(place => {
     // 假設圖片放在 media/map/ 資料夾下
     const iconUrl = `./media/map/icon${iconId}.jpg`; 
 
-    // 2. 為每個景點建立專屬的 Icon
     const customIcon = L.icon({
         iconUrl: iconUrl,
-        iconSize: [60, 60],      // 設定圖標大小 (您可以依需求調整，例如 [50, 50])
-        iconAnchor: [30, 30],    // 讓圖標中心點對準座標 (大小的一半)
-        popupAnchor: [0, -24],   // Popup 彈出位置往上推
-        className: 'custom-spot-icon' // 套用剛剛寫的 CSS 樣式
+        
+        // ★★★ 修改這裡：加大尺寸 ★★★
+        iconSize: [64, 64],      // 原本是 [48, 48]，改成 64 甚至 70 都可以
+        iconAnchor: [32, 32],    // 這是圖標的中心點，必須是 iconSize 的一半 (64/2 = 32)
+        
+        popupAnchor: [0, -32],   // Popup 彈出的位置，數值等於 iconAnchor 的 Y 值 (往上推)
+        className: 'custom-spot-icon' 
     });
 
     // 3. 使用新的 customIcon 建立標記
