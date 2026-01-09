@@ -75,7 +75,7 @@ placesData.forEach(place => {
                 <h6 class="fw-bold mb-1">${place.name}</h6>
                 <p class="small text-muted mb-2 text-truncate">${place.desc}</p>
                 <div class="d-grid gap-2">
-                    <a href="introduce.html?spot=modal-spot${place.id}" class="btn btn-sm btn-outline-primary">
+                    <a href="introduce.html?spot=modal-spot${place.id}" target="_blank" class="btn btn-sm btn-outline-primary">
                         了解更多 ➜
                     </a>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}" target="_blank" class="btn btn-sm btn-warning text-white">
